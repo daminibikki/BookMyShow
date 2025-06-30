@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: bookmyshow-clone
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn bookmyseat.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: bookmyseat.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: PYTHON_VERSION
+        value: 3.9
+      - key: DATABASE_URL
+        value: postgresql://django_bookmyshow_user:uF7eu2GnnDbqvUgYswCYpIS5TKTtsAUS@dpg-cshi84o8fa8c739dsme0-a.oregon-postgres.render.com/django_bookmyshow 
