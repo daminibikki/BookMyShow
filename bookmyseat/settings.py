@@ -26,8 +26,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-c8aetlj(=vp90n@#yoc^&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', '.onrender.com', '.render.com']
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'bookmyshow-clone-production.up.railway.app','.vercel.app', '.onrender.com', '.render.com']
+ 
 # Application definition
 
 INSTALLED_APPS = [
@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+DATABASES['default'] = dj_database_url.parse('postgresql://bookmyshow_db_vuu4_user:KtRNrjYWkcXelbxF6EdH0fmDykroAqxB@dpg-d1gvblnfte5s7394phc0-a.oregon-postgres.render.com/bookmyshow_db_vuu4')
 # PostgreSQL configuration using Render (uncomment for production)
 # DATABASES = {
 #     'default': dj_database_url.parse('postgresql://django_bookmyshow_user:uF7eu2GnnDbqvUgYswCYpIS5TKTtsAUS@dpg-cshi84o8fa8c739dsme0-a.oregon-postgres.render.com/django_bookmyshow')
