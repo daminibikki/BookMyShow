@@ -26,7 +26,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-c8aetlj(=vp90n@#yoc^&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'bookmyshow-clone-production.up.railway.app','.vercel.app', '.onrender.com', '.render.com']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '.onrender.com',     # ✅ required for Render backend
+    'bookmyshow-clone.onrender.com'  # ✅ your actual Render URL (optional but safe)
+]
  
 # Application definition
 
@@ -88,8 +93,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-
+DATABASES['default'] = dj_database_url.parse('postgresql://bookmyshow_db_vuu4_user:KtRNrjYWkcXelbxF6EdH0fmDykroAqxB@dpg-d1gvblnfte5s7394phc0-a.oregon-postgres.render.com/bookmyshow_db_vuu4')
 # PostgreSQL configuration using Render (uncomment for production)
 # DATABASES = {
 #     'default': dj_database_url.parse('postgresql://django_bookmyshow_user:uF7eu2GnnDbqvUgYswCYpIS5TKTtsAUS@dpg-cshi84o8fa8c739dsme0-a.oregon-postgres.render.com/django_bookmyshow')
@@ -139,7 +143,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

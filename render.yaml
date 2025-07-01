@@ -5,7 +5,10 @@ services:
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-    startCommand: "gunicorn bookmyseat.wsgi:application"
+    startCommand: >
+      python manage.py migrate &&
+      python manage.py shell < create_admin.py &&
+      gunicorn bookmyseat.wsgi:application
     staticPublishPath: staticfiles
     envVars:
       - key: DJANGO_SETTINGS_MODULE
@@ -17,4 +20,4 @@ services:
       - key: PYTHON_VERSION
         value: 3.9
       - key: DATABASE_URL
-        value: postgresql://django_bookmyshow_user:uF7eu2GnnDbqvUgYswCYpIS5TKTtsAUS@dpg-cshi84o8fa8c739dsme0-a.oregon-postgres.render.com/django_bookmyshow 
+        value: postgresql://django_bookmyshow_user:uF7eu2GnnDbqvUgYswCYpIS5TKTtsAUS@dpg-cshi84o8fa8c739dsme0-a.oregon-postgres.render.com/django_bookmyshow
