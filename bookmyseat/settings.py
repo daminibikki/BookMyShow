@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     '.onrender.com',     # ✅ required for Render backend
-    'bookmyshow-clone.onrender.com'  # ✅ your actual Render URL (optional but safe)
+    'bookmyshow-web.onrender.com'  # ✅ your actual Render URL (optional but safe)
 ]
  
 # Application definition
