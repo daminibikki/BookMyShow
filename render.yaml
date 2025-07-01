@@ -1,12 +1,14 @@
 services:
   - type: web
-    name: bookmyshow-clone
+    name: bookmyshow-web
     env: python
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
-      python manage.py migrate
-    startCommand: gunicorn bookmyseat.wsgi:application
+    startCommand: >
+      python manage.py migrate &&
+      python manage.py shell < create_admin.py &&
+      gunicorn bookmyseat.wsgi:application
     staticPublishPath: staticfiles
     envVars:
       - key: DJANGO_SETTINGS_MODULE
