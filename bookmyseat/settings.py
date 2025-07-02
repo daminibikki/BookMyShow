@@ -87,12 +87,15 @@ WSGI_APPLICATION = 'bookmyseat.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # Default SQLite configuration (for development)
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600
+    )
 }
+
 DATABASES['default'] = dj_database_url.parse('postgresql://bookmyshow_db_vuu4_user:KtRNrjYWkcXelbxF6EdH0fmDykroAqxB@dpg-d1gvblnfte5s7394phc0-a.oregon-postgres.render.com/bookmyshow_db_vuu4')
 # PostgreSQL configuration using Render (uncomment for production)
 # DATABASES = {
@@ -102,16 +105,19 @@ DATABASES['default'] = dj_database_url.parse('postgresql://bookmyshow_db_vuu4_us
 # Alternative configurations (commented out):
 
 # For local PostgreSQL development, you can use:
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'bookmyshow_db',
-#         'USER': 'your_username',
-#         'PASSWORD': 'your_password',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+#DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'bookmyshow_db_vuu4',
+#        'USER': 'bookmyshow_db_vuu4_user',
+#        'PASSWORD': 'your_password',
+#        'HOST': 'dpg-d1gvblnfte5s7394phc0-a.oregon-postgres.render.com',
+#        'PORT': '5432',
+#        'OPTIONS': {
+#            'sslmode': 'require',
+#        },
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
