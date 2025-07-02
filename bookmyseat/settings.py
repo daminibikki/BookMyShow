@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-c8aetlj(=vp90n@#yoc^&d(_6ivp(d!bv-4-f!r$lawptjzrwu')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
@@ -97,8 +97,11 @@ DATABASES = {
     )
 }
 
-DATABASES['default'] = dj_database_url.parse('postgresql://bookmyshow_db_vuu4_user:KtRNrjYWkcXelbxF6EdH0fmDykroAqxB@dpg-d1gvblnfte5s7394phc0-a.oregon-postgres.render.com/bookmyshow_db_vuu4',    conn_max_age=600,
-    ssl_require=True)
+DATABASE_URL = os.environ.get('DATABASE_URL', 'postgresql://bookmyshow_db_vuu4_user:KtRNrjYWkcXelbxF6EdH0fmDykroAqxB@dpg-d1gvblnfte5s7394phc0-a.oregon-postgres.render.com/bookmyshow_db_vuu4')
+
+DATABASES = {
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
+}   
 # PostgreSQL configuration using Render (uncomment for production)
 # DATABASES = {
 #     'default': dj_database_url.parse('postgresql://django_bookmyshow_user:uF7eu2GnnDbqvUgYswCYpIS5TKTtsAUS@dpg-cshi84o8fa8c739dsme0-a.oregon-postgres.render.com/django_bookmyshow', conn_max_age=600,
