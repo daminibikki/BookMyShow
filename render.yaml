@@ -19,5 +19,7 @@ services:
         value: "False"
       - key: PYTHON_VERSION
         value: "3.9"
+      - key: RENDER
+        value: "True"
       - key: DATABASE_URL
         value: postgresql://django_bookmyshow_user:uF7eu2GnnDbqvUgYswCYpIS5TKTtsAUS@dpg-cshi84o8fa8c739dsme0-a.oregon-postgres.render.com/django_bookmyshow
